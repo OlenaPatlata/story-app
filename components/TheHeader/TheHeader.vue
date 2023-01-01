@@ -2,10 +2,20 @@
   <header class="main-header">
     <nav class="main-nav">
       <ul class="nav-links">
-        <nuxt-link to="/" tag="li" class="nav-link"><a>All posts</a></nuxt-link>
-        <nuxt-link to="/about" tag="li" class="nav-link"
-          ><a>About</a></nuxt-link
+        <nuxt-link
+          to="/blog"
+          tag="li"
+          class="nav-link"
         >
+          <a>All posts</a>
+        </nuxt-link>
+        <nuxt-link
+          to="/about"
+          tag="li"
+          class="nav-link"
+        >
+          <a>About</a>
+        </nuxt-link>
       </ul>
     </nav>
   </header>
@@ -13,7 +23,7 @@
 
 <script>
 export default {
-  name: 'TheHeader',
+  name: 'TheHeader'
 }
 </script>
 

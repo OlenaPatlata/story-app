@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import PostPreview from '../components/blog/PostPreview.vue'
+import PostPreview from '@/components/blog/PostPreview.vue'
 export default {
   name: 'IndexPage',
   components: {
@@ -30,6 +30,8 @@ export default {
         starts_with: 'blog/'
       })
       .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res.data.stories)
         return {
           posts: res.data.stories.map((story) => {
             return {
