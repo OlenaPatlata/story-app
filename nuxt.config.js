@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -39,6 +41,17 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    [
+      '@storyblok/nuxt-2/module',
+      {
+        accessToken:
+          process.env.NODE_ENV === 'production'
+            ? process.env.STORYBLOK_SPACE_TOKEN_PRODUCTION
+            : process.env.STORYBLOK_SPACE_TOKEN_DEV,
+        cacheProvider: 'memory',
+      },
+    ],
+
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
@@ -46,6 +59,23 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
   ],
+  generate: {
+    routes: function () {
+      axios
+        .get(
+          'https://api.storyblok.com/v1/cdn/stories&version=published&token=' +
+            process.env.STORYBLOK_SPACE_TOKEN_PRODUCTION +
+            'starts_with=blok&cv=' +
+            Math.floor(Date.now() / 1e3)
+        )
+        .then((res) => {
+          const blogPosts = res.data.stories.map((bp) => bp.full_slug)
+          // eslint-disable-next-line no-console
+          console.log(blogPosts)
+          return ['/', '/blog', '/about', ...blogPosts]
+        })
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

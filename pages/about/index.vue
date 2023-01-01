@@ -1,11 +1,8 @@
 <template>
-  <section class="about-page">
-    <h2>Hello everyone, it is test app</h2>
+  <section v-editable="blok" class="about-page">
+    <h2 class="about-title">{{ title }}</h2>
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad perferendis
-      omnis hic dolorum modi incidunt doloribus pariatur delectus. Minus ipsam
-      corrupti a aperiam blanditiis veniam, accusamus nesciunt ut dolorem
-      obcaecati!
+      {{ content }}
     </p>
   </section>
 </template>
@@ -13,7 +10,41 @@
 <script>
 export default {
   name: 'AboutPage',
+  asyncData(context) {
+    return context.app.$storyapi
+      .get('cdn/stories', {
+        version: context.isDev ? 'draft' : 'published',
+        starts_with: 'about/',
+      })
+      .then((res) => {
+        return {
+          blok: res.data.stories[0].content,
+          title: res.data.stories[0].content.title,
+          content: res.data.stories[0].content.text,
+        }
+      })
+  },
+  mounted(){
+    this.$storyblok.init()
+    this.$storyblok.on('change', ()=>{
+      location.reload(true)
+    })
+  }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.about-page {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-title {
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+</style>
