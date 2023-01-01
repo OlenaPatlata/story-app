@@ -12,26 +12,26 @@
 
 <script>
 export default {
-  asyncData(context) {
+  asyncData (context) {
     return context.app.$storyapi
-      .get("cdn/stories/about", {
-        version: context.isDev ? "draft" : "published"
+      .get('cdn/stories/about', {
+        version: context.isDev ? 'draft' : 'published'
       })
-      .then(res => {
+      .then((res) => {
         return {
           blok: res.data.story.content,
           title: res.data.story.content.title,
           content: res.data.story.content.content
-        };
-      });
+        }
+      })
   },
-  mounted() {
-    this.$storyblok.init();
-    this.$storyblok.on("change", () => {
-      location.reload(true);
-    });
+  mounted () {
+    this.$storyblok.init()
+    this.$storyblok.on('change', () => {
+      location.reload(true)
+    })
   }
-};
+}
 </script>
 
 <style>
