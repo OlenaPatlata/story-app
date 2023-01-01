@@ -11,7 +11,7 @@
 import TheHeader from '../components/TheHeader/TheHeader.vue'
 export default {
   name: 'Default',
-  components: { TheHeader },
+  components: { TheHeader }
 }
 </script>
 

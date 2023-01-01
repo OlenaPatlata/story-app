@@ -1,14 +1,22 @@
 <template>
-  <section v-editable="blok" class="post" >
+  <section v-editable="blok" class="post">
     <div
       :style="{ backgroundImage: 'url(' + thumbnailUrl + ')' }"
       class="post-thumbnail"
-    ></div>
+    />
     <div class="post-content">
-      <h3 class="post-title">{{ title }}</h3>
-      <p class="post-text">{{ text }}</p>
-      <h3 class="post-title">Instructions</h3>
-      <div class="post-instructions">{{ instructions }}</div>
+      <h3 class="post-title">
+        {{ title }}
+      </h3>
+      <p class="post-text">
+        {{ text }}
+      </p>
+      <h3 class="post-title">
+        Instructions
+      </h3>
+      <div class="post-instructions">
+        {{ instructions }}
+      </div>
     </div>
   </section>
 </template>
@@ -16,10 +24,10 @@
 <script>
 export default {
   name: 'Post',
-  asyncData(context) {
+  asyncData (context) {
     return context.app.$storyapi
       .get('cdn/stories/blog/' + context.params.postId, {
-        version: context.isDev ? 'draft' : 'published',
+        version: context.isDev ? 'draft' : 'published'
       })
       .then((res) => {
         return {
@@ -27,13 +35,13 @@ export default {
           thumbnailUrl: res.data.story.content.thumbnail,
           title: res.data.story.content.title,
           text: res.data.story.content.text,
-          instructions: res.data.story.content.instructions,
+          instructions: res.data.story.content.instructions
         }
       })
   },
-  mounted(){
+  mounted () {
     this.$storyblok.init()
-    this.$storyblok.on('change', ()=>{
+    this.$storyblok.on('change', () => {
       location.reload(true)
     })
   }

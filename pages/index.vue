@@ -16,9 +16,9 @@ import PostPreview from '../components/blog/PostPreview.vue'
 export default {
   name: 'IndexPage',
   components: {
-    PostPreview,
+    PostPreview
   },
-  asyncData(context) {
+  asyncData (context) {
     // // This what would we do in real project
     // const version = context.query._storyblok || context.isDev ? 'draft' : 'published'
     // const fullSlug = (context.route.path == '/' || context.route.path == '') ? 'home' : context.route.path
@@ -27,7 +27,7 @@ export default {
     return context.app.$storyapi
       .get('cdn/stories', {
         version: context.isDev ? 'draft' : 'published',
-        starts_with: 'blog/',
+        starts_with: 'blog/'
       })
       .then((res) => {
         return {
@@ -36,9 +36,9 @@ export default {
               id: story.slug,
               title: story.content.title,
               excerpt: story.content.summary,
-              thumbnailUrl: story.content.thumbnail,
+              thumbnailUrl: story.content.thumbnail
             }
-          }),
+          })
         }
       })
       .catch((res) => {
@@ -48,16 +48,16 @@ export default {
           // eslint-disable-next-line no-console
           context.error({
             statusCode: 404,
-            message: 'Failed to receive content form api',
+            message: 'Failed to receive content form api'
           })
         } else {
           context.error({
             statusCode: res.response.status,
-            message: res.response.data,
+            message: res.response.data
           })
         }
       })
-  },
+  }
 }
 </script>
 

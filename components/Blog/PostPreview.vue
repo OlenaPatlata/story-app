@@ -4,10 +4,14 @@
       <div
         :style="{ backgroundImage: 'url(' + thumbnailUrl + ')' }"
         class="post-preview-thumbnail"
-      ></div>
+      />
       <div class="post-preview-content">
-        <h3 class="post-preview-title">{{ title }}</h3>
-        <div class="post-preview-text">{{ excerpt }}</div>
+        <h3 class="post-preview-title">
+          {{ title }}
+        </h3>
+        <div class="post-preview-text">
+          {{ excerpt }}
+        </div>
       </div>
     </article>
   </nuxt-link>
@@ -19,21 +23,21 @@ export default {
   props: {
     title: {
       type: String,
-      required: true,
+      required: true
     },
     excerpt: {
       type: String,
-      required: true,
+      required: true
     },
     thumbnailUrl: {
       type: String,
-      required: true,
+      required: true
     },
     id: {
       type: String,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 }
 </script>
 
