@@ -24,13 +24,13 @@ export default {
           content: res.data.story.content.content
         }
       })
-  },
-  mounted () {
-    this.$storyblok.init()
-    this.$storyblok.on('change', () => {
-      location.reload(true)
-    })
   }
+  // mounted () {
+  //   this.$storyblok.init()
+  //   this.$storyblok.on('change', () => {
+  //     location.reload(true)
+  //   })
+  // }
 }
 </script>
 

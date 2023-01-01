@@ -38,13 +38,13 @@ export default {
           instructions: res.data.story.content.instructions
         }
       })
-  },
-  mounted () {
-    this.$storyblok.init()
-    this.$storyblok.on('change', () => {
-      location.reload(true)
-    })
   }
+  // mounted () {
+  //   this.$storyblok.init()
+  //   this.$storyblok.on('change', () => {
+  //     location.reload(true)
+  //   })
+  // }
 }
 </script>
 
